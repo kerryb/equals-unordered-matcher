@@ -32,4 +32,20 @@ describe "equals_unordered matcher" do
   it "doesn't matches arrays with repeated elements in one but not the other" do
     expect([1, 2, 3, 2]).not_to equal_unordered([2, 1, 3])
   end
+
+  it "matches identical hashes" do
+    expect({a: 1, b: 2}).to equal_unordered({a: 1, b: 2})
+  end
+
+  it "doesn't match hashes with different keys" do
+    expect({a: 1, b: 2}).not_to equal_unordered({a: 1, c: 2})
+  end
+
+  it "doesn't match hashes with different values" do
+    expect({a: 1, b: 2}).not_to equal_unordered({a: 1, b: 3})
+  end
+
+  it "doesn't match hashes with extra keys" do
+    expect({a: 1, b: 2}).not_to equal_unordered({a: 1, b: 2, c: 3})
+  end
 end
