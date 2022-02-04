@@ -17,11 +17,19 @@ describe "equals_unordered matcher" do
     expect([1, 2, 3]).to equal_unordered([2, 1, 3])
   end
 
+  it "matches arrays with repeated elements in a different order" do
+    expect([1, 2, 3, 2]).to equal_unordered([2, 2, 1, 3])
+  end
+
   it "doesn't match arrays with different elements" do
     expect([1, 2, 3]).not_to equal_unordered([1, 1, 3])
   end
 
   it "doesn't match arrays with different numbers of elements" do
     expect([1, 2, 3]).not_to equal_unordered([1, 2])
+  end
+
+  it "doesn't matches arrays with repeated elements in one but not the other" do
+    expect([1, 2, 3, 2]).not_to equal_unordered([2, 1, 3])
   end
 end
