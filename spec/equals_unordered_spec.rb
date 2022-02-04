@@ -8,4 +8,20 @@ describe "equals_unordered matcher" do
   it "doesn't match different primitive objects" do
     expect(:foo).not_to equal_unordered(:bar)
   end
+
+  it "matches identical arrays" do
+    expect([1, 2, 3]).to equal_unordered([1, 2, 3])
+  end
+
+  it "matches arrays with the same elements in a different order" do
+    expect([1, 2, 3]).to equal_unordered([2, 1, 3])
+  end
+
+  it "doesn't match arrays with different elements" do
+    expect([1, 2, 3]).not_to equal_unordered([1, 1, 3])
+  end
+
+  it "doesn't match arrays with different numbers of elements" do
+    expect([1, 2, 3]).not_to equal_unordered([1, 2])
+  end
 end
