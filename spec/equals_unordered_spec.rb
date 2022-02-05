@@ -48,4 +48,12 @@ describe "equals_unordered matcher" do
   it "doesn't match hashes with extra keys" do
     expect({a: 1, b: 2}).not_to equal_unordered({a: 1, b: 2, c: 3})
   end
+
+  it "matches deeply-nested arrays with elements in a different order" do
+    expect([1, [2, [3, 4], 5], 6]).to equal_unordered([[5, [4, 3], 2], 6, 1])
+  end
+
+  it "doesn't match deeply-nested arrays with different elements" do
+    expect([1, [2, [3, 4], 5], 6]).not_to equal_unordered([[5, [4, 0], 2], 6, 1])
+  end
 end
